@@ -14,7 +14,6 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Mi Aplicación React</h1>
       <Login />
     </div>
   );

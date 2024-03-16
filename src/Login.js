@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useUser } from './UserContext'; 
 
 function Login() {
@@ -29,8 +30,6 @@ function Login() {
 
             if (response.ok) {
                 const responseData = await response.json();
-                
-        
                 login(responseData);
             }
 
@@ -38,36 +37,33 @@ function Login() {
             console.error('Fail request:', error);
         }
 
-        //setUsername('');
-        //setPassword('');
+        setUsername('');
+        setPassword('');
     };
 
     return (
-        <div>
-        <h2>Iniciar sesión</h2>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="username">Nombre de usuario:</label>
-                <input
-                    type="text"
-                    id="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                />
-            </div>
-            <div>
-                <label htmlFor="password">Contraseña:</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                />
-                </div>
-            <button type="submit">Iniciar sesión</button>
-        </form>
+        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+            <Container className="d-flex justify-content-center" 
+                style={{ background: 'rgb(187 235 167 / 24%)', padding: '100px', borderRadius: '10px', width: '500px', height: '500px'}}>
+                <Form className="mt-3" onSubmit={handleSubmit}>
+                    <Row className="mb-3">
+                        <Form.Group as={Col} controlId="formBasicEmail">
+                            <Form.Label>Username</Form.Label>
+                            <Form.Control type="text" placeholder="Enter username" value={username} 
+                                onChange={(e) => setUsername(e.target.value)}/>
+                            
+                        </Form.Group>
+                    </Row>
+                    <Row className="mb-3">                
+                        <Form.Group as={Col} controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Enter password" value={password}
+                                    onChange={(e) => setPassword(e.target.value)}/>
+                        </Form.Group>
+                    </Row>
+                    <Button variant="primary" type="submit">Login</Button>    
+                </Form>
+            </Container>
         </div>
     );
 }
