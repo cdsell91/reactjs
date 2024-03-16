@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React from 'react';
+import Login from './Login';
+import Dashboard from './Dashboard';
+import { useUser } from './UserContext'; 
+
 import './App.css';
 
 function App() {
+  const { user } = useUser();
+
+  if (user) {
+    return <Dashboard />;
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Mi Aplicación React</h1>
+      <Login />
     </div>
   );
 }
