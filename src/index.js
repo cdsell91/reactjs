@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './custom.scss'; 
 import App from './App';
 import { UserProvider } from './UserContext'; // Import conxtext provider UserProvider
 

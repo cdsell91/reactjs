@@ -1,12 +1,10 @@
 import React from 'react';
-import { useUser } from './UserContext'; // Importar el hook useUser
+import { useUser } from './UserContext';
 
 function Dashboard() {
-  const { user, logout } = useUser(); // Obtén el usuario y la función logout del contexto
+  const { user, logout } = useUser();
 
-  // Función para cerrar sesión
   const handleLogout = () => {
-    // Simplemente limpiamos el usuario y el token del contexto
     logout();
   };
 

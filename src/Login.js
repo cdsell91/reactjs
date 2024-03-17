@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { useUser } from './UserContext'; 
+import './Login.css';
 
 function Login() {
 
@@ -43,15 +44,20 @@ function Login() {
 
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-            <Container className="d-flex justify-content-center" 
-                style={{ background: 'rgb(187 235 167 / 24%)', padding: '100px', borderRadius: '10px', width: '500px', height: '500px'}}>
+            <Container className="d-flex justify-content-center border border-primary border-sm p-3" 
+                style={{ 
+                    padding: '100px', 
+                    borderRadius: '10px', 
+                    width: '500px', 
+                    height: '500px',
+                    borderBlockColor: '#00000'
+                    }}>
                 <Form className="mt-3" onSubmit={handleSubmit}>
                     <Row className="mb-3">
                         <Form.Group as={Col} controlId="formBasicEmail">
                             <Form.Label>Username</Form.Label>
                             <Form.Control type="text" placeholder="Enter username" value={username} 
                                 onChange={(e) => setUsername(e.target.value)}/>
-                            
                         </Form.Group>
                     </Row>
                     <Row className="mb-3">                

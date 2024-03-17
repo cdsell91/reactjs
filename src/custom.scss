@@ -1,0 +1,10 @@
+
+@import '~bootstrap/scss/bootstrap';
+
+// Sobrescribe las variables de Bootstrap
+$primary: #a5c458;
+$secondary: #c7c9c2;
+// Otras variables que deseas sobrescribir...
+
+// Compila Bootstrap con tus cambios
+@import '~bootstrap/scss/bootstrap';
