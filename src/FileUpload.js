@@ -1,30 +1,59 @@
 import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { useUser } from './UserContext';
 
-function FileUpload() {
+function FileUpload({updateDataAfterUpload}) {
+
+  const { token } = useUser();
+
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
-    // Aquí puedes manejar la carga del archivo, por ejemplo, enviarlo a un servidor
-    if (selectedFile) {
-      console.log('Archivo seleccionado:', selectedFile);
-    } else {
-      console.log('No se ha seleccionado ningún archivo.');
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    
+    try {
+      const response = await fetch('http://localhost:8081/xlsx/process', {
+        method: 'POST',
+        headers: {
+          'Authorization': `${token}`
+        },
+        body: formData
+      });
+
+      if (!response.ok) {
+        console.error('Error: cannot update file!');  
+      }
+
+      const responseData = await response.json();
+      updateDataAfterUpload(responseData);
+
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
 
   return (
-    <Container>
+    <Container className="d-flex justify-content-center align-items-center" 
+                style={{ minHeight: '10vh', padding: '10px'}}>
       <Form>
-        <Form.Group controlId="formFile" className="mb-3">
-          <Form.Label>Select File</Form.Label>
-          <Form.Control type="file" onChange={handleFileChange} />
+        <Form.Group>
+          <Row>
+            <Col xs={10}>
+              <Form.Control type="file" onChange={handleFileChange} />
+            </Col>
+            <Col xs={2}>
+              <Button variant="primary" onClick={handleSubmit}>Send</Button>
+            </Col>
+          </Row>
         </Form.Group>
-        <Button variant="primary" onClick={handleUpload}>Send</Button>
+    
       </Form>
     </Container>
   );
