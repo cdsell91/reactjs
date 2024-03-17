@@ -19,7 +19,7 @@ function FileUpload({updateDataAfterUpload}) {
     formData.append('file', selectedFile);
     
     try {
-      const response = await fetch('http://localhost:8081/xlsx/process', {
+      const response = await fetch('http://localhost:8081/file/upload', {
         method: 'POST',
         headers: {
           'Authorization': `${token}`
